@@ -11,6 +11,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: truskmsarih/repodeux
+          token: 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
 
       - name: Run Script
         run: |
