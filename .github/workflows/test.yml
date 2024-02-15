@@ -3,7 +3,7 @@ name: Trigger RepoA Workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   send-request:
