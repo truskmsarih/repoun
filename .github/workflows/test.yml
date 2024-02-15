@@ -1,18 +1,19 @@
-name: Run Script on New Commit
+name: Trigger RepoA Workflow
+
 on:
   push:
     branches:
       - master
+
 jobs:
-  execute-script:
+  send-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout RepoA
-        uses: actions/checkout@v2
-        with:
-          repository: truskmsarih/repodeux
-          token: ${{ secrets.REPOA_ACCESS_TOKEN }}
-          
-      - name: Run Script
+      - name: Send Repository Dispatch
         run: |
-          echo "Hello world"
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.REPOA_ACCESS_TOKEN }}" \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/truskmsarih/repodeux/dispatches \
+            -d '{"event_type": "run-script"}'
